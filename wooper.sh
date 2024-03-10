@@ -455,10 +455,8 @@ if [[ -d /data/data/com.gocheats.launcher ]] && [[ ! -s $exeggcute ]] ;then
 fi
 
 # enable wooper monitor
-if [ -f /system/bin/wooper_monitor.sh ] ;then
     /system/bin/wooper_monitor.sh >/dev/null 2>&1 &
     echo "`date +%Y-%m-%d_%T` wooper.sh: wooper monitor enabled" >> $logfile
-fi
 
 for i in "$@" ;do
     case "$i" in
