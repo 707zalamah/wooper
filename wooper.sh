@@ -455,7 +455,9 @@ if [[ -d /data/data/com.gocheats.launcher ]] && [[ ! -s $exeggcute ]] ;then
 fi
 
 # enable wooper monitor
-if [[ $(grep useMonitor $wooper_versions | awk -F "=" '{ print $NF }' | awk '{ gsub(/ /,""); print }') == "true" ]] && [ -f /system/bin/wooper_monitor.sh ] ;then
+if [ -f /system/bin/wooper_monitor.sh ] ;then
+  checkMonitor=$(pgrep -f /system/bin/wooper_monitor.sh)
+  if [ -z $checkMonitor ] ;then
     /system/bin/wooper_monitor.sh >/dev/null 2>&1 &
     echo "`date +%Y-%m-%d_%T` wooper.sh: wooper monitor enabled" >> $logfile
   fi
