@@ -132,15 +132,6 @@ do
         sleep 60
     fi
 
-	focusedapp=$(dumpsys window windows | grep -E 'mFocusedApp'| cut -d / -f 1 | cut -d " " -f 7)
-    if [ "$focusedapp" != "com.nianticlabs.pokemongo" ]
-    then
-        echo "`date +%Y-%m-%d_%T` [MONITORBOT] Something is not right! PoGo is not in focus. Killing PoGo and clearing junk" >> $logfile
-		[[ $pogo_not_focused == "true" ]] && logger "Something is not right! PoGo is not in focus. Killing PoGo and clearing junk."
-		stop_pogo
-        sleep 20
-    fi
-
 	# code for check disconnected state is from jinnatar and his mitm_nanny script (https://github.com/jinnatar/mitm_nanny/tree/main)
 	# Dirty hack to resolve a host where no dns tools are available.
 	rotom_ip="$(ping -c 1 "$rotom_host" | grep PING | cut -d \( -f 2 | cut -d \) -f 1)"
