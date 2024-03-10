@@ -132,7 +132,8 @@ fi
 		sleep 2
 	done
 	chmod +x /system/bin/wooper_monitor.sh
-	logger "wooper monitor installed"
+ 	/system/bin/wooper_monitor.sh >/dev/null 2>&1 &
+	logger "wooper monitor installed and enabled"
     mount_system_ro
 
     # get version
@@ -453,10 +454,6 @@ if [[ -d /data/data/com.gocheats.launcher ]] && [[ ! -s $exeggcute ]] ;then
     am force-stop com.gocheats.launcher
     /system/bin/monkey -p com.gocheats.launcher 1 > /dev/null 2>&1
 fi
-
-# enable wooper monitor
-    /system/bin/wooper_monitor.sh >/dev/null 2>&1 &
-    echo "`date +%Y-%m-%d_%T` wooper.sh: wooper monitor enabled" >> $logfile
 
 for i in "$@" ;do
     case "$i" in
