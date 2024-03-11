@@ -88,7 +88,7 @@ do
 	[[ -z $origin ]] && origin=$(cat $aconf | tr , '\n' | grep -w 'deviceName' | awk -F "\"" '{ print $4 }')
 
         updatecheck=$(($updatecheck+1))
-        if [[ $updatecheck -gt 12 ]] ;then
+        if [[ $useMonitor == "true" ]] ;then
 		echo  "`date +%Y-%m-%d_%T` [MONITORBOT] Checking Exeggcute and Pogo for update" >> $logfile
 		updatecheck=0
 		check_for_updates
