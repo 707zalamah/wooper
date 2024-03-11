@@ -128,12 +128,11 @@ fi
 	logger "cron jobs installed"
 
 	# install wooper monitor
-	until /system/xbin/curl -s -k -L --fail --show-error -o /system/bin/wooper_monitor.sh https://raw.githubusercontent.com/707zalamah/wooper/main/wooper_monitor.sh || { echo "`date +%Y-%m-%d_%T` Download wooper_monitor.sh failed, exit script" >> $logfile ; exit 1; } ;do
+	until /system/bin/curl -s -k -L --fail --show-error -o /system/bin/wooper_monitor.sh https://raw.githubusercontent.com/andi2022/wooper/main/wooper_monitor.sh || { echo "`date +%Y-%m-%d_%T` Download wooper_monitor.sh failed, exit script" >> $logfile ; exit 1; } ;do
 		sleep 2
 	done
 	chmod +x /system/bin/wooper_monitor.sh
- 	/system/bin/wooper_monitor.sh >/dev/null 2>&1 &
-	logger "wooper monitor installed and enabled"
+	logger "wooper monitor installed"
     mount_system_ro
 
     # get version
@@ -453,6 +452,15 @@ if [[ -d /data/data/com.gocheats.launcher ]] && [[ ! -s $exeggcute ]] ;then
     install_config
     am force-stop com.gocheats.launcher
     am start -n com.gocheats.launcher/.MainActivity
+fi
+
+# enable wooper monitor
+if [[ $(grep useMonitor $wooper_versions | awk -F "=" '{ print $NF }' | awk '{ gsub(/ /,""); print }') == "true" ]] && [ -f /system/bin/wooper_monitor.sh ] ;then
+  checkMonitor=$(pgrep -f /system/bin/wooper_monitor.sh)
+  if [ -z $checkMonitor ] ;then
+    /system/bin/wooper_monitor.sh >/dev/null 2>&1 &
+    echo "`date +%Y-%m-%d_%T` wooper.sh: wooper monitor enabled" >> $logfile
+  fi
 fi
 
 for i in "$@" ;do
