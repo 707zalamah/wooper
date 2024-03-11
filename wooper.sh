@@ -15,7 +15,7 @@ fi
 
 logfile="/data/local/tmp/wooper.log"
 exeggcute="/data/local/tmp/config.json"
-wooper_versions="/data/local/wooper_versions"
+wooper_versions="/data/local/tmp/wooper_versions"
 [[ -f /data/local/wooper_download ]] && wooper_download=$(/system/bin/grep url /data/local/wooper_download | awk -F "=" '{ print $NF }')
 [[ -f /data/local/wooper_download ]] && wooper_user=$(/system/bin/grep authUser /data/local/wooper_download | awk -F "=" '{ print $NF }')
 [[ -f /data/local/wooper_download ]] && wooper_pass=$(/system/bin/grep authPass /data/local/wooper_download | awk -F "=" '{ print $NF }')
