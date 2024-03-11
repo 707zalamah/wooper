@@ -17,16 +17,17 @@ connection_min=1 # Number of upsteam ws connections to require.
 android_version=`getprop ro.build.version.release | sed -e 's/\..*//'`
 updatecheck=0
 
-discord_webhook="https://discord.com/api/webhooks/1207112381604565002/EtsRI8LhWafcWadHOSydMI5KKSEdIEfWOxlRFd6RjTGvbeHD2hqVNk_kktc2TYNo7kuY"
-useMonitor=true
-monitor_interval=300
-update_check_interval=3600
-debug=true
-recreate_exeggcute_config=false
-exeggcute_died=true
-exeggcute_disconnected=true
-pogo_died=true
-pogo_not_focused=false
+source /data/local/tmp/wooper_versions
+export discord_webhook
+export useMonitor
+export monitor_interval
+export update_check_interval
+export debug
+export recreate_exeggcute_config
+export exeggcute_died
+export exeggcute_disconnected
+export pogo_died
+export pogo_not_focused
 
 update_check=$((update_check_interval/monitor_interval))
 
