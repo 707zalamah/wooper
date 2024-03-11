@@ -62,7 +62,7 @@ stop_start_exeggcute () {
 	am force-stop com.nianticlabs.pokemongo &  rm -rf /data/data/com.nianticlabs.pokemongo/cache/* & am force-stop com.gocheats.launcher
 	sleep 5
 	[[ $debug == "true" ]] && echo "`date +%Y-%m-%d_%T` [MONITORBOT] Start exeggcute launcher" >> $logfile
-	/system/bin/monkey -p com.gocheats.launcher 1 > /dev/null 2>&1
+	am start -n com.gocheats.launcher/.MainActivity
 	sleep 1
 }
 
