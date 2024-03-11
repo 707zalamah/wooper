@@ -2,9 +2,9 @@
 # version 1.3.7
 
 #Version checks
-Ver55wooper="1.0"
+Ver55wooper="1.1"
 Ver55cron="1.0"
-VerMonitor="1.1.5"
+VerMonitor="1.1.6"
 
 android_version=`getprop ro.build.version.release | sed -e 's/\..*//'`
 
