@@ -168,7 +168,7 @@ fi
     downgrade_pogo
 
     # start execute
-    /system/bin/monkey -p com.gocheats.launcher 1 > /dev/null 2>&1
+    am start -n com.gocheats.launcher/.MainActivity
     sleep 15
 
     # Set for reboot device
@@ -240,7 +240,7 @@ update_all(){
 	  logger "New workers count $workerscount is active, restarting exeggcute"
 	  am force-stop com.gocheats.launcher
 	  sleep 2
-	  /system/bin/monkey -p com.gocheats.launcher 1 > /dev/null 2>&1
+	  am start -n com.gocheats.launcher/.MainActivity
 	else
      echo "`date +%Y-%m-%d_%T` workers count ok or not enabled" >> $logfile
     fi
@@ -262,7 +262,7 @@ update_all(){
 		magisk --sqlite "REPLACE INTO policies (uid,policy,until,logging,notification) VALUES($euid,2,0,1,1);"
         /system/bin/pm grant com.gocheats.launcher android.permission.READ_EXTERNAL_STORAGE
         /system/bin/pm grant com.gocheats.launcher android.permission.WRITE_EXTERNAL_STORAGE
-		/system/bin/monkey -p com.gocheats.launcher 1 > /dev/null 2>&1
+		am start -n com.gocheats.launcher/.MainActivity
         logger "exeggcute updated, launcher started"
       fi
       if [ "$pogo_install" = "install" ] ;then
@@ -275,7 +275,7 @@ update_all(){
 		sleep 2
         /system/bin/pm install -r /sdcard/Download/pogo.apk || { echo "`date +%Y-%m-%d_%T` Install pogo failed, downgrade perhaps? Exit script" >> $logfile ; exit 1; }
         /system/bin/rm -f /sdcard/Download/pogo.apk
-        /system/bin/monkey -p com.gocheats.launcher 1 > /dev/null 2>&1
+        am start -n com.gocheats.launcher/.MainActivity
         logger "PoGo $pversions, launcher started"
       fi
 	  if [ "$playintegrityfix_install" = "install" ] ;then
@@ -452,7 +452,7 @@ fi
 if [[ -d /data/data/com.gocheats.launcher ]] && [[ ! -s $exeggcute ]] ;then
     install_config
     am force-stop com.gocheats.launcher
-    /system/bin/monkey -p com.gocheats.launcher 1 > /dev/null 2>&1
+    am start -n com.gocheats.launcher/.MainActivity
 fi
 
 for i in "$@" ;do
