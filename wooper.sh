@@ -460,6 +460,7 @@ if [ -f /system/bin/wooper_monitor.sh ] ;then
   if [ -z $checkMonitor ] ;then
     /system/bin/wooper_monitor.sh >/dev/null 2>&1 &
     echo "`date +%Y-%m-%d_%T` wooper.sh: wooper monitor enabled" >> $logfile
+    logger "wooper monitor enabled"
   fi
 fi
 
