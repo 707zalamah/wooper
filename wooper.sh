@@ -132,7 +132,7 @@ fi
 		sleep 2
 	done
 	chmod +x /system/bin/wooper_monitor.sh
- 	/system/bin/wooper_monitor.sh >/dev/null 2>&1 &
+ 	/system/bin/wooper_monitor.sh > /dev/null 2>&1
 	logger "wooper monitor installed and enabled"
     mount_system_ro
 
@@ -416,7 +416,7 @@ if [[ $(basename $0) = "wooper_new.sh" ]] ;then
       if [ ! -z $checkMonitor ] ;then
         kill -9 $checkMonitor
         sleep 2
-        /system/bin/wooper_monitor.sh >/dev/null 2>&1 &
+        /system/bin/wooper_monitor.sh > /dev/null 2>&1
 		logger "wooper monitor restarted"
       fi
     fi
@@ -461,7 +461,7 @@ fi
         kill -9 $checkMonitor
         sleep 2
       fi
-        /system/bin/wooper_monitor.sh >/dev/null 2>&1 &
+        /system/bin/wooper_monitor.sh > /dev/null 2>&1
 	echo "`date +%Y-%m-%d_%T` wooper.sh: wooper monitor started" >> $logfile
 
 for i in "$@" ;do
