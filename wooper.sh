@@ -460,7 +460,6 @@ fi
         kill -9 $checkMonitor
         sleep 2
       fi
-       sleep 15
         /system/bin/wooper_monitor.sh >/dev/null 2>&1 &
 	echo "`date +%Y-%m-%d_%T` wooper.sh: wooper monitor started" >> $logfile
 
