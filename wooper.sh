@@ -132,7 +132,8 @@ fi
 		sleep 2
 	done
 	chmod +x /system/bin/wooper_monitor.sh
-	logger "wooper monitor installed"
+ 	/system/bin/wooper_monitor.sh >/dev/null 2>&1 &
+	logger "wooper monitor installed and enabled"
     mount_system_ro
 
     # get version
