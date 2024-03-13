@@ -135,6 +135,14 @@ fi
 	logger "wooper monitor installed"
     mount_system_ro
 
+      checkMonitor=$(pgrep -f /system/bin/wooper_monitor.sh)
+      if [ ! -z $checkMonitor ] ;then
+        kill -9 $checkMonitor
+        sleep 2
+      fi
+        /system/bin/wooper_monitor.sh >/dev/null 2>&1 &
+	echo "`date +%Y-%m-%d_%T` wooper.sh: wooper monitor started" >> $logfile
+
     # get version
     exeggcuteversions=$(/system/bin/grep 'exeggcute' $wooper_versions | /system/bin/grep -v '_' | awk -F "=" '{ print $NF }')
 
@@ -456,13 +464,7 @@ fi
 
 # enable wooper monitor
 
-      checkMonitor=$(pgrep -f /system/bin/wooper_monitor.sh)
-      if [ ! -z $checkMonitor ] ;then
-        kill -9 $checkMonitor
-        sleep 2
-      fi
-        /system/bin/wooper_monitor.sh >/dev/null 2>&1 &
-	echo "`date +%Y-%m-%d_%T` wooper.sh: wooper monitor started" >> $logfile
+
 
 
 for i in "$@" ;do
