@@ -135,14 +135,6 @@ fi
 	logger "wooper monitor installed"
     mount_system_ro
 
-      checkMonitor=$(pgrep -f /system/bin/wooper_monitor.sh)
-      if [ ! -z $checkMonitor ] ;then
-        kill -9 $checkMonitor
-        sleep 2
-      fi
-        /system/bin/wooper_monitor.sh >/dev/null 2>&1 &
-	echo "`date +%Y-%m-%d_%T` wooper.sh: wooper monitor started" >> $logfile
-
     # get version
     exeggcuteversions=$(/system/bin/grep 'exeggcute' $wooper_versions | /system/bin/grep -v '_' | awk -F "=" '{ print $NF }')
 
@@ -463,9 +455,14 @@ if [[ -d /data/data/com.gocheats.launcher ]] && [[ ! -s $exeggcute ]] ;then
 fi
 
 # enable wooper monitor
-
-
-
+      checkMonitor=$(pgrep -f /system/bin/wooper_monitor.sh)
+      if [ ! -z $checkMonitor ] ;then
+        kill -9 $checkMonitor
+        sleep 2
+      fi
+       sleep 15
+        /system/bin/wooper_monitor.sh >/dev/null 2>&1 &
+	echo "`date +%Y-%m-%d_%T` wooper.sh: wooper monitor started" >> $logfile
 
 for i in "$@" ;do
     case "$i" in
