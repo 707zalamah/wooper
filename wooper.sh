@@ -463,7 +463,6 @@ fi
       fi
         /system/bin/wooper_monitor.sh >/dev/null 2>&1 &
 	echo "`date +%Y-%m-%d_%T` wooper.sh: wooper monitor started" >> $logfile
-	logger "wooper monitor started"
 
 
 for i in "$@" ;do
