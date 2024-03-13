@@ -132,8 +132,7 @@ fi
 		sleep 2
 	done
 	chmod +x /system/bin/wooper_monitor.sh
- 	/system/bin/wooper_monitor.sh > /dev/null 2>&1
-	logger "wooper monitor installed and enabled"
+	logger "wooper monitor installed"
     mount_system_ro
 
     # get version
@@ -416,7 +415,7 @@ if [[ $(basename $0) = "wooper_new.sh" ]] ;then
       if [ ! -z $checkMonitor ] ;then
         kill -9 $checkMonitor
         sleep 2
-        /system/bin/wooper_monitor.sh > /dev/null 2>&1
+        /system/bin/wooper_monitor.sh >/dev/null 2>&1 &
 		logger "wooper monitor restarted"
       fi
     fi
@@ -456,8 +455,13 @@ if [[ -d /data/data/com.gocheats.launcher ]] && [[ ! -s $exeggcute ]] ;then
 fi
 
 # enable wooper monitor
-/system/bin/wooper_monitor.sh > /dev/null 2>&1
-echo "`date +%Y-%m-%d_%T` wooper.sh: wooper monitor started" >> $logfile
+if [[ $(grep useMonitor $wooper_versions | awk -F "=" '{ print $NF }') == "true" ]] && [ -f /system/bin/wooper_monitor.sh ] ;then
+  checkMonitor=$(pgrep -f /system/bin/wooper_monitor.sh)
+  if [ -z $checkMonitor ] ;then
+    /system/bin/wooper_monitor.sh >/dev/null 2>&1 &
+    echo "`date +%Y-%m-%d_%T` wooper.sh: wooper monitor enabled" >> $logfile
+  fi
+fi
 
 for i in "$@" ;do
     case "$i" in
